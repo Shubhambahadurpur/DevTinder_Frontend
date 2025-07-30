@@ -34,7 +34,7 @@ const Login = () => {
   const submitForm = async () => {
     try {
       await axios.post('http://localhost:3000/login', { emailId: loginData.email, password: loginData.password}, { withCredentials: true})
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     } catch (err) {
       console.error("ERROR while logging in")
     }
