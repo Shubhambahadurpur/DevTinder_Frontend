@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import validator from 'validator';
+import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router";
 
 interface LoginData {
   email: string,
@@ -9,7 +12,9 @@ interface LoginData {
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginData>({ email: '', password: '' });
-  const [errors, setErrors] = useState<string>('')
+  const [errors, setErrors] = useState<string>('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const changeEmail = (value: string) => {
     if (value.trim() === '') {
@@ -33,9 +38,12 @@ const Login = () => {
 
   const submitForm = async () => {
     try {
-      await axios.post('http://localhost:3000/login', { emailId: loginData.email, password: loginData.password}, { withCredentials: true})
-
-    } catch (err) {
+      const res = await axios.post('http://localhost:3000/login', { emailId: loginData.email, password: loginData.password}, { withCredentials: true})
+      if (res.data) {
+        dispatch(addUser(res.data));
+        navigate('/feed')
+      }
+    } catch (err: unknown) {
       console.error("ERROR while logging in")
     }
   }
