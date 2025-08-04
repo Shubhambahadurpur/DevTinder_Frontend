@@ -8,3 +8,8 @@
   background-color: rgb(233, 31, 31);
   color: #fff;
 }
+
+.alert-warning {
+  background-color: rgb(247, 247, 55);
+  color: #fff;
+}

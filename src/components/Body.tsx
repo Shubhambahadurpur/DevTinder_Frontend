@@ -5,7 +5,6 @@ import { useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addUser } from "../utils/userSlice"
 import type { RootState } from "../utils/appStore"
-import Toast from "./Toast"
 
 
 const Body = () => {

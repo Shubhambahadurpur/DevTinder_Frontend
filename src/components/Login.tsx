@@ -38,7 +38,7 @@ const Login = () => {
 
   const submitForm = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/login', { emailId: loginData.email, password: loginData.password}, { withCredentials: true})
+      const res = await axios.post('http://localhost:3000/login', { emailId: loginData.email, password: loginData.password }, { withCredentials: true })
       if (res.data) {
         dispatch(addUser(res.data));
         navigate('/feed')
@@ -61,7 +61,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center mt-15">
-      <div className="card bg-base-300 w-96 shadow-sm">
+      <div className="card bg-gray-300 w-96 shadow-sm">
         <div className="card-body">
           <h2 className="card-title text-2xl flex justify-center">Login</h2>
           <label htmlFor="email" className="font-medium text-xl">Email</label>
@@ -69,7 +69,7 @@ const Login = () => {
 
           <label htmlFor="password" className="font-medium text-xl mt-2">Password</label>
           <input type="password" id='password' value={loginData.password} onChange={(e) => changePassword(e.target.value)} className="input" placeholder="Enter your Password" />
-        {errors && <div className="text-red-500">{errors}</div>}
+          {errors && <div className="text-red-500">{errors}</div>}
         </div>
 
 
@@ -77,16 +77,8 @@ const Login = () => {
           <button className="btn btn-accent" onClick={validateFormData}>Login</button>
         </div>
 
-        <div className="flex justify-center"> New User? <a rel="stylesheet" href="/signup" className="text-blue-500 ml-2"> Sign Up </a> </div>
+        <div className="flex justify-center mb-5"> New User? <a rel="stylesheet" href="/signup" className="text-blue-500 ml-2"> Sign Up </a> </div>
       </div>
-      {/* <div className="toast toast-top toast-end">
-  <div className="alert alert-info">
-    <span>New mail arrived.</span>
-  </div>
-  <div className="alert alert-success">
-    <span>Message sent successfully.</span>
-  </div>
-</div> */}
     </div>
   )
 }

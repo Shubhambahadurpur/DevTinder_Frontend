@@ -7,9 +7,9 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 
 interface ToastData {
-  showToast: boolean;
-  status: string;
-  message: string;
+    showToast: boolean;
+    status: string;
+    message: string;
 }
 
 interface EditProfileFormProps {
@@ -19,9 +19,9 @@ interface EditProfileFormProps {
 }
 
 interface EditFormDataType {
-    profilePhoto: string, 
-    age: number | undefined, 
-    skills: string, 
+    profilePhoto: string,
+    age: number | undefined,
+    skills: string,
     about: string
 }
 
@@ -41,53 +41,50 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({ user, setIsEditProfil
         }
 
         try {
-            const res = await axios.patch("http://localhost:3000/profile/edit", {profilePhoto: editFormData.profilePhoto, age: editFormData.age, skills: editFormData.skills.split(','), about: editFormData.about }, { withCredentials: true });
+            const res = await axios.patch("http://localhost:3000/profile/edit", { profilePhotoo: editFormData.profilePhoto, age: editFormData.age, skills: editFormData.skills.split(','), about: editFormData.about }, { withCredentials: true });
             if (res?.data?.data) {
                 dispatch(addUser(res?.data?.data));
-                setToastData({ showToast: true, status: 'success', message: "Profile Updated Successfully."})
+                setToastData({ showToast: true, status: 'success', message: "Profile Updated Successfully." })
                 setIsEditProfile(false);
-
-                setTimeout(() => {
-                    setToastData({ showToast: false, status: '', message: ""})
-                },1000)
             }
 
         } catch (err) {
-            console.error(err)
+            setToastData({ showToast: true, status: 'error', message: err?.response?.data || "Something went wrong." })
+            setIsEditProfile(false);
         }
 
     }
 
     return (
         <div className="flex justify-center mt-15 ">
-            <fieldset className="fieldset bg-base-300 border-base-300 rounded-box w-xl border p-4">
+            <fieldset className="fieldset bg-gray-300 border-base-300 rounded-box w-xl border p-4">
 
                 <div className="flex justify-between">
                     <h2 className='text-2xl font-bold text-black'>Edit Profile</h2>
-                    <XMarkIcon className='w-5 h-5 cursor-pointer'onClick={() => setIsEditProfile(false)} />
+                    <XMarkIcon className='w-5 h-5 cursor-pointer' onClick={() => setIsEditProfile(false)} />
                 </div>
 
                 <label className="label font-medium text-gray-800 text-lg">Profile Photo</label>
-                <input type="text" className="input w-full" value={editFormData.profilePhoto} onChange={(e) => setEditFormData((prev) => ({...prev, profilePhoto: e.target.value}))} placeholder="Enter Profile Photo Url" />
+                <input type="text" className="input w-full" value={editFormData.profilePhoto} onChange={(e) => setEditFormData((prev) => ({ ...prev, profilePhoto: e.target.value }))} placeholder="Enter Profile Photo Url" />
 
                 <label className="label font-medium text-gray-800 text-lg">Age</label>
-                <input type="number" className="input w-full" value={editFormData.age} min={18} onChange={(e) => setEditFormData((prev) => ({...prev, age: Number(e.target.value)}))} placeholder="Enter Age" />
+                <input type="number" className="input w-full" value={editFormData.age} min={18} onChange={(e) => setEditFormData((prev) => ({ ...prev, age: Number(e.target.value) }))} placeholder="Enter Age" />
 
                 <label className="label font-medium text-gray-800 text-lg">Skills</label>
-                <input type="text" className="input w-full" value={editFormData.skills} onChange={(e) => setEditFormData((prev) => ({...prev, skills: e.target.value}))} placeholder="Skills" />
+                <input type="text" className="input w-full" value={editFormData.skills} onChange={(e) => setEditFormData((prev) => ({ ...prev, skills: e.target.value }))} placeholder="Skills" />
                 <p className='text-blue-500'>Enter Skills seperated by comma ( , )</p>
 
                 <label className="label font-medium text-gray-800 text-lg">About</label>
-                <textarea className="textarea w-full" value={editFormData.about} onChange={(e) => setEditFormData((prev) => ({...prev, about: e.target.value}))} placeholder="Add About yourself" />
+                <textarea className="textarea w-full" value={editFormData.about} onChange={(e) => setEditFormData((prev) => ({ ...prev, about: e.target.value }))} placeholder="Add About yourself" />
 
-                    <div className='mt-2 flex justify-center'>
-                        <p className='text-red-600'>{errors}</p>
-                    </div>
+                <div className='mt-2 flex justify-center'>
+                    <p className='text-red-600'>{errors}</p>
+                </div>
 
 
                 <div className='flex justify-center'>
-                <button className="btn btn-accent mt-4" onClick={updateProfile} >Update</button>
-                <button className="btn btn-secondary mt-4 ml-2" onClick={() => setIsEditProfile(false)}>Cancel</button>
+                    <button className="btn btn-accent mt-4" onClick={updateProfile} >Update</button>
+                    <button className="btn btn-secondary mt-4 ml-2" onClick={() => setIsEditProfile(false)}>Cancel</button>
                 </div>
             </fieldset>
         </div>
