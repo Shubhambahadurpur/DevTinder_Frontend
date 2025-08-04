@@ -43,8 +43,9 @@ const Login = () => {
         dispatch(addUser(res.data));
         navigate('/feed')
       }
-    } catch (err: unknown) {
-      console.error("ERROR while logging in")
+    } catch (err: any) {
+      setErrors(err?.response?.data)
+      console.error("ERROR while logging in", err)
     }
   }
 
@@ -52,10 +53,6 @@ const Login = () => {
     if (!validator.isEmail(loginData.email)) {
       setErrors("Please Enter a valid email id");
     }
-    else if (!validator.isStrongPassword(loginData.password)) {
-      setErrors("Please Enter a strong password");
-    }
-
     else {
       submitForm();
     }
