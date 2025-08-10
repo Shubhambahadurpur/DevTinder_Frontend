@@ -31,7 +31,7 @@ const Navbar = () => {
                 <img alt="Tailwind CSS Navbar component" src={(user as { profilePhoto: string })?.profilePhoto} />
               </div>
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 shadow">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1000 mt-3 w-52 shadow">
               <li> <Link to='/profile' className="justify-between h-10 p-3 font-medium"> Profile </Link> </li>
               <li> <Link to='/connections' className="justify-between h-10 p-3 font-medium"> Connections </Link> </li>
               <li> <Link to='/connection-requests' className="justify-between h-10 p-3 font-medium"> Connection requests </Link> </li>
