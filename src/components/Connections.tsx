@@ -9,7 +9,7 @@ const Connections = () => {
 
     const getConnections = async () => {
         try {
-            const res = await axios.get('http://localhost:3000/user/connections', { withCredentials: true });
+            const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/user/connections`, { withCredentials: true });
             if (res?.data) {
                 setMyConnections(res.data?.data)
             }
@@ -36,7 +36,7 @@ const Connections = () => {
                         </div>
                     </div>
                 ) : <div><h1 className="mt-10 font-bold text-4xl text-gray-700">No Connections Available</h1>
-                    <button className="btn btn-primary mt-10"><Link to={"/feed"}>Go to feed page</Link></button>
+                    <button className="btn btn-primary mt-10"><Link to={"/"}>Go to feed page</Link></button>
                 </div>}
             </div>
         </div>

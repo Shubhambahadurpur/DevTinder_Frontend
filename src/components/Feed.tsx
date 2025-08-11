@@ -15,7 +15,7 @@ const Feed = () => {
   const getFeed = async () => {
     if (feed?.length) return;
     try {
-      const res = await axios.get("http://localhost:3000/user/feed", { withCredentials: true});
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/user/feed`, { withCredentials: true});
       if (res?.data) {
         dispatch(addFeed(res?.data?.data))
       }

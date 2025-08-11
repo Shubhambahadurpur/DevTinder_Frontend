@@ -41,7 +41,7 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({ user, setIsEditProfil
         }
 
         try {
-            const res = await axios.patch("http://localhost:3000/profile/edit", { profilePhotoo: editFormData.profilePhoto, age: editFormData.age, skills: editFormData.skills.split(','), about: editFormData.about }, { withCredentials: true });
+            const res = await axios.patch(`${import.meta.env.VITE_BASE_URL}/profile/edit`, { profilePhoto: editFormData.profilePhoto, age: editFormData.age, skills: editFormData.skills.split(','), about: editFormData.about }, { withCredentials: true });
             if (res?.data?.data) {
                 dispatch(addUser(res?.data?.data));
                 setToastData({ showToast: true, status: 'success', message: "Profile Updated Successfully." })

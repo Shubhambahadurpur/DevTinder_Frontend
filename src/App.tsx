@@ -8,6 +8,8 @@ import Feed from './components/Feed'
 import Profile from './components/Profile'
 import Connections from './components/Connections'
 import ConnectionRequests from './components/ConnectionRequests'
+import SignUp from './components/SignUp'
+import NotFound from './components/NotFound'
 function App() {
 
   return (
@@ -16,11 +18,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Body />} >
+            <Route path='' element={<Feed />} />
             <Route path='login' element={<Login />} />
-            <Route path='feed' element={<Feed />} />
+            <Route path='signup' element={<SignUp />} />
             <Route path='profile' element={<Profile />} />
             <Route path='connections' element={<Connections />} />
             <Route path='connection-requests' element={<ConnectionRequests />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

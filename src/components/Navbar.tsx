@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const logoutUser = async () => {
     try {
-      await axios.post('http://localhost:3000/logout', {}, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/logout`, {}, { withCredentials: true });
       dispatch(removeUser());
       return navigate('/login')
     } catch (err) {

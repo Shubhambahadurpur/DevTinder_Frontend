@@ -38,10 +38,10 @@ const Login = () => {
 
   const submitForm = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/login', { emailId: loginData.email, password: loginData.password }, { withCredentials: true })
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/login`, { emailId: loginData.email, password: loginData.password }, { withCredentials: true })
       if (res.data) {
         dispatch(addUser(res.data));
-        navigate('/feed')
+        navigate('/')
       }
     } catch (err: any) {
       setErrors(err?.response?.data)

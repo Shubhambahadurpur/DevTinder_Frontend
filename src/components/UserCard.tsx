@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeUserFeed } from "../utils/feedSlice";
+import Toast from "./Toast";
+import { useState } from "react";
 
 export interface User {
     _id: string,
@@ -18,14 +20,19 @@ interface UserCardProps {
     user: User;
 }
 const UserCard: React.FC<UserCardProps> = ({user}) => {
-
+    const [toastData, setToastData] = useState({ showToast: false, status: "", message: "" })
     const dispatch = useDispatch();
 
     const sendRequestHandler = async (status: string) => {
         try {
-            const res = await axios.post(`http://localhost:3000/request/send/${status}/${user?._id}`, {}, {withCredentials: true})
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/request/send/${status}/${user?._id}`, {}, {withCredentials: true})
             if (res.data) {
                 dispatch(removeUserFeed(user?._id))
+                if (status === 'interested')
+                    setToastData({  showToast: true, status: 'success', message: "Connection Request Send Successfully." })
+                else {
+                    setToastData({  showToast: true, status: "success", message: "Ignored Successfully." })
+                }
             }
         } catch (err) {
             console.error(err);
@@ -49,6 +56,7 @@ const UserCard: React.FC<UserCardProps> = ({user}) => {
                     <button className="btn btn-accent" onClick={() => sendRequestHandler('interested')} >Send Request</button>
                 </div>
             </div>
+            <Toast {...toastData} onClose={() => setToastData({ showToast: false, status: "", message: "" })} />
         </div>
     )
 }

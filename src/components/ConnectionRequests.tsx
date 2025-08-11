@@ -21,7 +21,7 @@ const ConnectionRequests = () => {
 
     const getConnectionRequests = async () => {
         try {
-            const res = await axios.get('http://localhost:3000/user/requests/received', { withCredentials: true });
+            const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/user/requests/received`, { withCredentials: true });
             if (res?.data) {
                 setMyConnectionRequests(res.data?.data)
             }
@@ -36,7 +36,7 @@ const ConnectionRequests = () => {
                 setToastData({ showToast: true, status: "warning", message: "Invalid Status" })
                 return;
             }
-            const res = await axios.post(`http://localhost:3000/request/review/${status}/${request._id}`, {}, { withCredentials: true });
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/request/review/${status}/${request._id}`, {}, { withCredentials: true });
             if (res.data) {
                 setToastData({ showToast: true, status: "success", message: `Request ${status} successfully.` });
                 navigate(0);
@@ -68,7 +68,7 @@ const ConnectionRequests = () => {
                         </div>
                     </div>
                 ) : <div><h1 className="mt-10 font-bold text-4xl text-gray-700">No Connections Available</h1>
-                    <button className="btn btn-primary mt-10"><Link to={"/feed"}>Go to feed page</Link></button>
+                    <button className="btn btn-primary mt-10"><Link to={"/"}>Go to feed page</Link></button>
                 </div>}
             </div>
 
