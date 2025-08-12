@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import validator from "validator";
 import { useNavigate } from "react-router";
 
-const Login = () => {
+const SignUp = () => {
 
     const [errors, setErrors] = useState<string>('');
     const formRef = useRef<HTMLFormElement>(null)
@@ -71,4 +71,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default SignUp
