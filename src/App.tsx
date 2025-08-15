@@ -10,6 +10,7 @@ import Connections from './components/Connections'
 import ConnectionRequests from './components/ConnectionRequests'
 import SignUp from './components/SignUp'
 import NotFound from './components/NotFound'
+import Chat from './components/Chat'
 function App() {
 
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='profile' element={<Profile />} />
             <Route path='connections' element={<Connections />} />
             <Route path='connection-requests' element={<ConnectionRequests />} />
+            <Route path='chat/:targetUserId' element={<Chat />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
