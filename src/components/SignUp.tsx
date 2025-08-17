@@ -24,7 +24,6 @@ const SignUp = () => {
                 return;
             }
             try {
-                console.log(import.meta.env.VITE_BASE_URL);
               const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/signup`, data, { withCredentials: true })
               if (res.data) {
                 navigate('/login')
